@@ -35,5 +35,7 @@ while True:
 
     screen.fill(black)
     pygame.draw.circle(screen, yellow,(320,y),15,0)
+    pygame.draw.rect(screen,pure_green,(320,0,60,150),0)
+    pygame.draw.rect(screen,pure_green,(320,330,60,150),0)
     #Continuously update the screen
     pygame.display.update()
