@@ -29,6 +29,17 @@ width1 = 50
 clock = pygame.time.Clock()
 # The game score
 score = 0
+# Image paths
+flappy_path="FlappyBird.png"
+flappybird=pygame.image.load(flappy_path)
+flappybird=pygame.transform.scale(flappybird,(60,50))
+pipe_path="Pipe.png"
+pipe=pygame.image.load(pipe_path)
+pipe=pygame.transform.scale(pipe,(width1+15,height1+100))
+pipe_inverted = pygame.transform.flip(pipe,False,True)
+background_path = "Background.png"
+background = pygame.image.load(background_path)
+background = pygame.transform.scale(background, (640,480))
 #The Game Loop”
 while True:
     #Most of our game logic goes here
@@ -45,6 +56,7 @@ while True:
     
     # Reset x when rectangles go out of bounds
     if x1 < 0:
+        score+=1
         x1 = 640
         y1 = random.randint(-300,0)
     # Quit when the player goes out of bounds
@@ -55,7 +67,7 @@ while True:
     if  x1<x+15<x1+width1:
         # print("boundry")
         if height1+y1 < y < 100+height1+y1:
-            score+=1
+            pass
         else:
             print("Game Over. Your score was", score)
             pygame.quit()
@@ -64,9 +76,12 @@ while True:
 
 
 
-    screen.fill(black)
+    screen.blit(background,(0,0))
     pygame.draw.circle(screen, yellow,(x,y),15,0)
+    screen.blit(flappybird,(x-30,y-30))
     pygame.draw.rect(screen,pure_green,(x1,y1,width1,height1),0)
+    screen.blit(pipe_inverted,(x1-5,y1-80))
     pygame.draw.rect(screen,pure_green,(x1,y1+height1+100,width1,height1+100),0)
+    screen.blit(pipe,(x1-5,y1+height1+70))
     #Continuously update the screen
     pygame.display.update()
